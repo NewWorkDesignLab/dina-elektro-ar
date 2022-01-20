@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount == 0)
             return;
 
-        if (raycastManager.Raycast(Input.GetTouch(0).position, hits))
+        if (raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = hits[0].pose;
     
