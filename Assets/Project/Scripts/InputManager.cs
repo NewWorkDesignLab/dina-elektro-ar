@@ -8,8 +8,6 @@ using UnityEngine.XR.ARSubsystems;
 public class InputManager : MonoBehaviour
 {
     public GameObject target;
- 
-    private GameObject spawnedObject;
     private ARRaycastManager raycastManager;
  
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -27,15 +25,7 @@ public class InputManager : MonoBehaviour
         if (raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
         {
             var hitPose = hits[0].pose;
-    
-            if(spawnedObject == null)
-            {
-                spawnedObject = Instantiate(target, hitPose.position, hitPose.rotation);
-            }
-            else
-            {
-                spawnedObject.transform.position = hitPose.position;
-            }
+            Instantiate(target, hitPose.position, hitPose.rotation);
         }
     }
 }
