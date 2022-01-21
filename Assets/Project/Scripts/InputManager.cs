@@ -4,28 +4,34 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-[RequireComponent(typeof(ARRaycastManager))]
+// [RequireComponent(typeof(ARRaycastManager))]
 public class InputManager : MonoBehaviour
 {
     public GameObject target;
-    private ARRaycastManager raycastManager;
+    // private ARRaycastManager raycastManager;
  
-    static List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    // static List<ARRaycastHit> hits = new List<ARRaycastHit>();
  
-    private void Awake()
-    {
-        raycastManager = GetComponent<ARRaycastManager>();
-    }
+    // private void Awake()
+    // {
+    //     raycastManager = GetComponent<ARRaycastManager>();
+    // }
  
     void Update()
     {
         if (Input.touchCount == 0)
             return;
 
-        if (raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.All))
+        // if (raycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.All))
+        // {
+        //     var hitPose = hits[0].pose;
+        //     Instantiate(target, hitPose.position, hitPose.rotation);
+        // }
+
+        RaycastHit hit;
+        if (Physics.Raycast(Input.GetTouch(0).position, transform.TransformDirection(Vector3.forward), out hit))
         {
-            var hitPose = hits[0].pose;
-            Instantiate(target, hitPose.position, hitPose.rotation);
+            Instantiate(target, hit.point, Quaternion.identity);
         }
     }
 }
